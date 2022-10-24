@@ -88,3 +88,20 @@ function setCard(type) {
 
 setCard("visa")
 globalThis.setCard = setCard // transformando em função global
+
+const addButton = document.querySelector("#button__ad")
+
+addButton.addEventListener("click", () => {
+  alert("Cartão adicionado!")
+})
+
+document.querySelector("form").addEventListener("submit", event => {
+  event.preventDefault()
+})
+
+const cardHolder = document.querySelector("#card-holder")
+cardHolder.addEventListener("input", () => {
+  const ccHolder = document.querySelector(".cc-holder .value")
+  ccHolder.innerText =
+    cardHolder.value.length === 0 ? "FULANO DA SILVA" : cardHolder.value
+})
