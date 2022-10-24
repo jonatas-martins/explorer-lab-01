@@ -10,12 +10,12 @@ const inputNumberCardPattern = {
   mask: [
     {
       mask: "0000 0000 0000 0000",
-      regex: /^4\d{0-15}/,
+      regex: /^4\d{0,15}/,
       cardtype: "visa",
     },
     {
       mask: "0000 0000 0000 0000",
-      regex: /(^5 [1-5]\d{0,2}|^22[2-9]\d|^2[3-7]\d{0,2})\d{0,12}/,
+      regex: /(^5[1-5]\d{0,2}|^22[2-9]\d|^2[3-7]\d{0,2})\d{0,12}/,
       cardtype: "master",
     },
     {
@@ -105,3 +105,23 @@ cardHolder.addEventListener("input", () => {
   ccHolder.innerText =
     cardHolder.value.length === 0 ? "FULANO DA SILVA" : cardHolder.value
 })
+
+inputSecurityCodeMasked.on("accept", () => {
+  updateSecurityCode(inputSecurityCodeMasked.value)
+})
+
+function updateSecurityCode(code) {
+  const ccSecurity = document.querySelector(".cc-security .value")
+  ccSecurity.innerText = code.length === 0 ? "123" : code
+}
+
+inputNumberCardMasked.on("accept", () => {
+  const cardType = inputNumberCardMasked.masked.currentMask.cardtype
+  setCard(cardType)
+  UpdateNumberCard(inputNumberCardMasked.value)
+})
+
+function UpdateNumberCard(numbers) {
+  const NumberCard = document.querySelector(".cc-number")
+  NumberCard.innerText = numbers.length === 0 ? "1234 5678 9012 3456" : numbers
+}
