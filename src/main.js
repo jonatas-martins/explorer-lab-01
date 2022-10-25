@@ -35,13 +35,13 @@ const inputNumberCardMasked = IMask(inputNumberCard, inputNumberCardPattern)
 
 const inputCardExpiration = document.getElementById("expiration-date")
 const inputCardExpirationPattern = {
-  mask: "MM{/}YYYY",
+  mask: "MM{/}YY",
   blocks: {
     YY: {
       mask: IMask.MaskedRange,
       from: new Date().getFullYear(),
       to: new Date().getFullYear() + 10,
-      minLength: 4,
+      minLength: 2,
     },
 
     MM: {
@@ -124,4 +124,13 @@ inputNumberCardMasked.on("accept", () => {
 function UpdateNumberCard(numbers) {
   const NumberCard = document.querySelector(".cc-number")
   NumberCard.innerText = numbers.length === 0 ? "1234 5678 9012 3456" : numbers
+}
+
+inputCardExpirationMasked.on("accept", () => {
+  UpdateExpirationDate(inputCardExpirationMasked.value)
+})
+
+function UpdateExpirationDate(date) {
+  const dataExpiration = document.querySelector(".cc-extra .value")
+  dataExpiration.innerText = date.lenght === 0 ? "02/2032" : date
 }
